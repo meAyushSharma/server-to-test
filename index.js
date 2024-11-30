@@ -14,6 +14,13 @@ app.get("/notifications", (req, res) => {
     res.json(data);
 });
 
-app.listen(3000, ()=>{
-    console.log("server listening on : http://localhost:3000/notifications");
+app.get("/currency-converter", (req, res)=> {
+    const {value} = req.body;
+    return res.status(200).json({
+        currencyConverted: Math.floor(Math.random()*80)*(value/10)
+    })
+})
+
+app.listen(3000,"0.0.0.0",()=>{
+    console.log("server listening on : http://localhost:3000/notifications and http://localhost:3000/currency-converter");
 });
