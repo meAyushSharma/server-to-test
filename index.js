@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const { currData } = require('./currency-data');
 const app = express();
 
 app.use(express.json());
@@ -15,10 +16,10 @@ app.get("/notifications", (req, res) => {
 });
 
 app.get("/currency-converter", (req, res)=> {
-    const {value} = req.body;
-    return res.status(200).json({
-        currencyConverted: Math.floor(Math.random()*80)*(value/10)
-    })
+    const curr = req.query.currency;
+    console.log("this is curr: ", curr)
+    console.log(currData["usd"])
+    return res.status(200).json(currData[curr]);
 })
 
 app.listen(3000,"0.0.0.0",()=>{
